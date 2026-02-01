@@ -1,39 +1,4 @@
 -- SETUP OF TABLES
-CREATE TABLE orders (
-	order_id INTEGER PRIMARY KEY,
-	created_at TIMESTAMP,
-	website_session_id INTEGER,
-	user_id INTEGER,
-	primary_product_id INTEGER,
-	items_purchased INTEGER,
-	price_usd FLOAT,
-	cogs FLOAT
-);
-
-CREATE TABLE order_items (
-	order_item_id INTEGER PRIMARY KEY,
-	created_at TIMESTAMP,
-	order_id INTEGER REFERENCES orders (order_id),
-	product_id INTEGER, 
-	is_primary_item	INTEGER,
-	price_usd FLOAT,
-	cogs_usd FLOAT
-);
-
-CREATE TABLE order_item_refunds (
-	order_item_refund_id INTEGER PRIMARY KEY,
-	created_at TIMESTAMP,
-	order_item_id INTEGER REFERENCES order_items (order_item_id),
-	order_id INTEGER REFERENCES orders (order_id),
-	refund_amount_usd FLOAT
-);
-
-CREATE TABLE products (
-	product_id INTEGER PRIMARY KEY,
-	created_at TIMESTAMP,
-	product_name VARCHAR
-);
-
 CREATE TABLE website_sessions (
 	website_session_id INTEGER PRIMARY KEY,
 	created_at TIMESTAMP,
@@ -53,15 +18,8 @@ CREATE TABLE website_pageviews (
 	pageview_url VARCHAR
 );
 
--- QUESTIONS
-
--- What is the trend in website sessions and order volume?
---- Monthly to Include Seasonality
-
--- What is the session-to-order conversion rate?
-
-
--- YEARLY
+-- QUERIES
+-- QUERY 1: YEARLY
 SELECT
 	completed_sessions.year,
 	completed_sessions.no_completed,
@@ -84,7 +42,7 @@ INNER JOIN (
 ON completed_sessions.year = all_sessions.year
 ORDER BY year DESC;
 
--- MONTHLY
+-- QUERY 2: MONTHLY
 WITH completed_sessions AS(
 	SELECT 
 		EXTRACT(MONTH FROM created_at) AS month,
@@ -114,13 +72,56 @@ ON completed_sessions.year = all_sessions.year
 	AND completed_sessions.month = all_sessions.month
 ORDER BY year DESC, month DESC;
 
--- In the yar 2015, we have a conversion rate of 8.44 % which is an increase from the previous year showing the improvements
+-- QUERY 3: BY DEVICE TYPE
+SELECT
+	completed_sessions.device_type,
+	completed_sessions.no_completed,
+	all_sessions.no_sessions,
+	ROUND(completed_sessions.no_completed * 1.0 / all_sessions.no_sessions * 100, 2) AS conversion_rate
+FROM(
+	SELECT 
+		device_type, 
+		COUNT(DISTINCT(website_session_id)) AS no_completed
+	FROM website_pageviews
+	INNER JOIN website_sessions USING(website_session_id)
+	WHERE pageview_url = '/thank-you-for-your-order'
+	GROUP BY device_type) AS completed_sessions
+INNER JOIN (
+	SELECT 
+		device_type, 
+		COUNT(DISTINCT(website_session_id)) AS no_sessions
+	FROM website_pageviews
+	INNER JOIN website_sessions USING(website_session_id)
+	GROUP BY device_type
+) AS all_sessions
+ON completed_sessions.device_type = all_sessions.device_type
+ORDER BY device_type;
 
--- Which marketing channels have been most successful?
---- Group By Landing Pages
-
--- How has the revenue per order evolved?
---- 
+-- QUERY 4: BY UTM CONTENT VARIANT
+SELECT
+	completed_sessions.utm_content,
+	completed_sessions.no_completed,
+	all_sessions.no_sessions,
+	ROUND(completed_sessions.no_completed * 1.0 / all_sessions.no_sessions * 100, 2) AS conversion_rate
+FROM(
+	SELECT 
+		utm_content, 
+		COUNT(DISTINCT(website_session_id)) AS no_completed
+	FROM website_pageviews
+	INNER JOIN website_sessions USING(website_session_id)
+	WHERE pageview_url = '/thank-you-for-your-order' AND NOT utm_content = 'NULL'
+	GROUP BY utm_content) AS completed_sessions
+INNER JOIN (
+	SELECT 
+		utm_content, 
+		COUNT(DISTINCT(website_session_id)) AS no_sessions
+	FROM website_pageviews
+	INNER JOIN website_sessions USING(website_session_id)
+	WHERE NOT utm_content = 'NULL'
+	GROUP BY utm_content
+) AS all_sessions
+ON completed_sessions.utm_content = all_sessions.utm_content
+ORDER BY conversion_rate DESC;
 
 -- How has the revenue per session evolved?
 
