@@ -123,6 +123,4 @@ INNER JOIN (
 ON completed_sessions.utm_content = all_sessions.utm_content
 ORDER BY conversion_rate DESC;
 
--- How has the revenue per session evolved?
-
 
