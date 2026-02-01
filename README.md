@@ -9,4 +9,6 @@
 ## Methodology
   All questions were answered in PostgreSQL. Subqueries, CTEs, and window functions were used for YoY changes and customer segmentation.
 
+## Insights
+
 ## Reommendations
