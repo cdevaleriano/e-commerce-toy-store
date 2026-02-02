@@ -11,10 +11,13 @@
 
 ## Insights
 - There is a steady growth in the conversion rate per year showing improvement over time.
-![alt text](Query 3 - Segmentation By Device.png)
+![alt text](https://github.com/cdevaleriano/e-commerce-toy-store/blob/main/Query%201%20-%20Yearly.png)
 - This is further seen in the Year-over-Year analysis where recent months have atleast 20% in the YoY calculations.
+![alt text](https://github.com/cdevaleriano/e-commerce-toy-store/blob/main/Query%202%20-%20Monthly%20YoY.png)
 - There is a massive difference in the conversion rates between desktop and mobile devices.
+![alt text](https://github.com/cdevaleriano/e-commerce-toy-store/blob/main/Query%203%20-%20Segmentation%20By%20Device.png)
 - Advertisements through bsearch & gsearch showed high conversion rates.
+![alt text](https://github.com/cdevaleriano/e-commerce-toy-store/blob/main/Query%204%20-%20Segmentation%20By%20Ad%20Variant.png)
 
 ## Reommendations
 - June & July 2014 have negative YoY changes. It is worth exploring the difference in marketing strategies during the time period.
