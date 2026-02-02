@@ -19,7 +19,7 @@
 - Advertisements through bsearch & gsearch showed high conversion rates.
 ![alt text](https://github.com/cdevaleriano/e-commerce-toy-store/blob/main/Query%204%20-%20Segmentation%20By%20Ad%20Variant.png)
 
-## Reommendations
+## Recommendations
 - June & July 2014 have negative YoY changes. It is worth exploring the difference in marketing strategies during the time period.
 - Socialbook advertisements bring the least amount of site visitors. It is worth exploring different advertisement variations on the platform.
 - Conduct Funnel Analysis to explore until what point do potential customers leave.
