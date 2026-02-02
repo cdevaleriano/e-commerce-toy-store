@@ -11,6 +11,7 @@
 
 ## Insights
 - There is a steady growth in the conversion rate per year showing improvement over time.
+![alt text](Query 1 - Yearly.png)
 - This is further seen in the Year-over-Year analysis where recent months have atleast 20% in the YoY calculations.
 - There is a massive difference in the conversion rates between desktop and mobile devices.
 - Advertisements through bsearch & gsearch showed high conversion rates.
