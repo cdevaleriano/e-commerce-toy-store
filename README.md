@@ -1,7 +1,7 @@
 # e-commerce-toy-store
 
 ## Business Problem Statement
-  A toy store e-commerce owner wants to determine the session-to-order conversion rate for their toy bears.
+  An e-commerce toy store specializing in collectible toy bears wants to evaluate the effectiveness of its online shopping experience by measuring the session-to-order conversion rate for toy bear products. Specifically, the business aims to understand what proportion of customer browsing sessions result in a completed purchase of a toy bear. This analysis will help the store owner assess current website performance, identify potential friction points in the customer journey, and inform data-driven decisions around marketing strategy, website optimization, and product merchandising.
 
 ## Dataset
   This project utilizes data from Maven Analytics Fuzzy Factory Set. The data reaches from March 2012 to March 2015 containing data per site entry with corresponding device of origin.
